@@ -1,27 +1,18 @@
-var builder = WebApplication.CreateBuilder(args); 
- 
-builder.Services.AddEndpointsApiExplorer(); 
-builder.Services.AddSwaggerGen(); 
+using production_api_skeleton.API.DependencyInjection;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApiServices();
  
 var app = builder.Build(); 
- 
-if (app.Environment.IsDevelopment()) 
-{ 
-    app.UseSwagger(); 
-    app.UseSwaggerUI(); 
-} 
- 
-app.MapGet("/health", () => 
-    Results.Ok(new 
-    { 
-        Status = "Healthy", 
-        Timestamp = DateTimeOffset.UtcNow 
-    })); 
+
+app.UseApiPipeline();
  
 app.Run(); 
  
-// Phục vụ Integration Test bằng WebApplicationFactory sau này. 
+// Cho phép WebApplicationFactory truy cập khi viết integration test.public partial class Program 
 public partial class Program 
+
 { 
     
 }
