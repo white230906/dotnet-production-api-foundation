@@ -73,5 +73,22 @@ Kiến thức mới
  Request : Contract
  Response: Contract
 
-8. 
+8. Carter
+
+IEndpointRouteBuilder là đối tượng dùng để đăng ký các URL endpoint cho ứng dụng.
+Hiểu đơn giản:
+-> Nó giống như một "bảng định tuyến", nơi bạn khai báo URL nào sẽ gọi hàm tương ứng đó
+
+Cơ chế hoạt động:
+
+Route group tạo URL chung
+  → MapGet/MapPost/MapPut nối thêm URL và HTTP method
+  → Request phù hợp sẽ gọi handler tương ứng
+  → Handler gọi Application service
+  → Handler trả HTTP response
+ 
+  WithName đặt tên endpoint.
+ 
+  Produces và ProducesProblem chỉ mô tả các response có thể trả về cho Swagger, không
+  tự xử lý thành công hay lỗi.
 

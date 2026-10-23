@@ -35,3 +35,7 @@ Structure
 │           └── WorkItemResponse.cs
 └── tests/
     └── Lab1.Api.IntegrationTests/
+
+
+I. Hiểu structure
+
