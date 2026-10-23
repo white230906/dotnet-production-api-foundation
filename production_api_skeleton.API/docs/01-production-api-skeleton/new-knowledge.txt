@@ -1,0 +1,77 @@
+Kiến thức mới
+
+0. Host
+- Host là một tiến trình đang chạy của backend
+- Khi bậc swagger thì project API đang host trên một địa chỉ: https://localhost:5001.
+- Program.cs nơi nơi cấu hình và khởi động host
+
+
+1. Cart
+
+- Carter là một thư viện của ASP.NET core
+> Carter được chọn để tổ chức Minimal API thành các module theo từng feature, giúp tránh việc khai báo toàn bộ endpoint trong Program.cs. Nó giữ endpoint gọn, dễ tìm kiếm và phù hợp với codebase lớn.
+
+
+2. DependencyInjection nằm trong tầng API
+
+- Là mới chứa các extension cấu hình giúp program.cs có thể đọc
+- Khá tương tự với JwtExtension, hay SwaggerExention, MiddlewareExtention
+- ApiServiceCollectionExtensions: 
+  + Dùng để đăng kí các servie trước builder.Build():
+  + Bên trong này sẽ đăng kí Carter, Swagger, API versioning, Options, CORS
+- ApiApplicationBuilderExtensions:
+  + Dùng để cấu hình middleware sau builder.Build():
+  + Bên trọng sẽ có exception middleware, COR, carter endpoint mapping
+
+3. Middleware
+
+- CorrelationIdMiddleware:
+  + Gắn mã định danh cho mỗi request
+  + Và mã này được đưa vào response và log, giúp tìm toàn bộ log liên quan đến cùng một request
+
+4. Options
+
+- Các class đại diện cho appsetting được gom về chỗ này
+- Lúc trước chúng ta hay có JwtOptions, PeperSecretOptions, ... thì giờ cấu hình chung vào chỗ này
+
+
+5. Presentation
+
+- Tầng này được tách ra từ folder controller nằm trong src có kiến trúc là 3-tier
+- Abstraction:
+  + Chứa logic HTTP dùng chung cho tất cả API, ví dụ chuyển lỗi thành response
+      protected static IResult NotFound(string message) => 
+          Results.Problem(message, statusCode: 404);
+- Apis:
+  + Chứa enpoint cụ thể của nghiệp vụ nào đó, ví dụ: WorkItemL
+    public class WorkItemApi : ApiEndpoint, ICarterModule 
+    { 
+        public void AddRoutes(IEndpointRouteBuilder app) 
+        { 
+            app.MapGet("/api/v1/work-items", GetAll); 
+            app.MapPost("/api/v1/work-items", Create); 
+        } 
+    }
+
+  + ApiEndpoint → công cụ HTTP dùng chung 
+  + WorkItemApi → URL và endpoint cụ thể của WorkItem
+
+
+6. Application
+
+> Application là tầng chứa và điều phối các use case của hệ thống. Nó nhận yêu cầu
+ từ Presentation, gọi Domain để thực hiện quy tắc nghiệp vụ và trả kết quả về Presentation.
+
+
+7. Contract
+- Tầng này chứa các kiểu dữ liệu dùng để giao tiếp giữa Presentation và Application,
+  chủ yếu gồm
+
+=> Lúc trước Service của mình được tách thành:
+ IService: Appli
+ Service : Appli
+ Request : Contract
+ Response: Contract
+
+8. 
+

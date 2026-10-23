@@ -10,5 +10,10 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\production-api-skeleton.Contract\production-api-skeleton.Contract.csproj" />
+      <ProjectReference Include="..\production-api-skeleton.Domain\production-api-skeleton.Domain.csproj" />
+    </ItemGroup>
     
 </Project>

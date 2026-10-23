@@ -5,7 +5,7 @@ public class Response
     public record WorkItemResponse(
         Guid Id,
         string Title,
-        string Description,
+        string Status,
         DateTime CreatedAt);
     
     
