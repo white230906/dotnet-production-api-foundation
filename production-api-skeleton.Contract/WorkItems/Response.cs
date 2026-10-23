@@ -2,5 +2,11 @@
 
 public class Response
 {
+    public record WorkItemResponse(
+        Guid Id,
+        string Title,
+        string Description,
+        DateTime CreatedAt);
+    
     
 }
