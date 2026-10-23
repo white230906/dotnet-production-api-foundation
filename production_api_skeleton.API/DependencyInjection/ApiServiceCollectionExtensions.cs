@@ -13,9 +13,9 @@ public static class ApiServiceCollectionExtensions
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
         services.AddCarter();
-
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        //thằng này làm cho swagger trông đẹp hơn
+        services.AddEndpointsApiExplorer();//thu thập metadata từ Minimal API/Carter.
+        services.AddSwaggerGen();// chuyển metadata thành tài liệu OpenAPI.
         services.AddProblemDetails();
 
         services

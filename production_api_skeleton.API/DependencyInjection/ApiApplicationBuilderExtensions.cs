@@ -15,7 +15,7 @@ public static class ApiApplicationBuilderExtensions
  
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger();
+            app.UseSwagger();//use cái đẹp
             app.UseSwaggerUI();
         }
  

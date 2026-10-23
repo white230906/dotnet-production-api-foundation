@@ -11,7 +11,8 @@ namespace production_api_skeleton.Presentation.Apis;
 public class WorkItem: ApiEndpoint, ICarterModule
 {
     private const string Route = "/api/v{version:apiVersion}/work-items";
-
+    //thằng swagger explore sẽ lấy dữ liệu đẹp hơn từ chỗ này, explore của thằng Carter
+    //cộng thêm nữa là DTO khá rõ ràng nên được như vậy
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         var versionedApi = app.NewVersionedApi("WorkItems");
