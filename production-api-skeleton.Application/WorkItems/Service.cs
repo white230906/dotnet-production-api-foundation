@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using Microsoft.Extensions.Options;
 using production_api_skeleton.Contract.WorkItems;
 using production_api_skeleton.Domain.WorkItems;
 
@@ -6,9 +7,16 @@ namespace production_api_skeleton.Application.WorkItems;
 
 public class Service: IService
 {
-    private const int MaxTitleLength = 100;
  
     private readonly ConcurrentDictionary<Guid, WorkItem> _items = new();
+    private readonly WorkItemOptions _options;
+    
+    public Service(IOptions<WorkItemOptions> options)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+        _options = options.Value;
+    }
+    
     public IReadOnlyCollection<Response.WorkItemResponse> GetAll()
     {
         return _items.Values
@@ -28,7 +36,7 @@ public class Service: IService
     {
         var item = WorkItem.Create(
             request.Title,
-            MaxTitleLength,
+            _options.MaxTitleLength,
             DateTimeOffset.UtcNow);
  
         if (!_items.TryAdd(item.Id, item))

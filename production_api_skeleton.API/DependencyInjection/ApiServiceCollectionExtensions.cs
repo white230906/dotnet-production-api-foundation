@@ -46,6 +46,14 @@ public static class ApiServiceCollectionExtensions
         //Client có thể gửi: status: "InProgress"
         //Thay vì phải gửi số khó hiểu như là 1
         
+        //bind
+        services
+            .AddOptions<WorkItemOptions>()
+            .BindConfiguration(WorkItemOptions.SectionName)
+            .Validate(options => options.MaxTitleLength is >= 3 and <= 200, 
+                "WorkItems:MaxTitleLength must be between 3 and 200.")
+            .ValidateOnStart();
+        
         //Singleton để dữ liệu in-memory tồn tại qua nhiều request
         services.AddSingleton<WorkItemService, WorkItemServiceImplementation>();
         
