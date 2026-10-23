@@ -1,5 +1,6 @@
 ﻿using Carter;
 using production_api_skeleton.API.Middleware;
+using Serilog;
 
 namespace production_api_skeleton.API.DependencyInjection;
 
@@ -9,7 +10,7 @@ public static class ApiApplicationBuilderExtensions
     {
         // Gắn mã định danh cho mỗi request.
         app.UseMiddleware<CorrelationIdMiddleware>();
- 
+        app.UseSerilogRequestLogging();
         // Bắt exception từ các middleware/endpoint phía sau.
         app.UseMiddleware<ExceptionHandlingMiddleware>();
  
