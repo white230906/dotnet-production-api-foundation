@@ -1,0 +1,37 @@
+Structure
+
+├── ProductionApiSkeleton.sln
+├── README.md
+├── src/
+│   ├── Lab1.Api/
+│   │   ├── Program.cs
+│   │   ├── appsettings.json
+│   │   ├── DependencyInjection/
+│   │   │   ├── ApiServiceCollectionExtensions.cs
+│   │   │   └── ApiApplicationBuilderExtensions.cs
+│   │   ├── Middleware/
+│   │   │   ├── CorrelationIdMiddleware.cs
+│   │   │   └── ExceptionHandlingMiddleware.cs
+│   │   └── Options/
+│   │       └── WorkItemOptions.cs
+│   ├── Lab1.Presentation/
+│   │   ├── Apis/
+│   │   │   └── WorkItems/
+│   │   │       └── WorkItemApi.cs
+│   │   └── Abstractions/
+│   │       └── ApiEndpoint.cs
+│   ├── Lab1.Application/
+│   │   └── WorkItems/
+│   │       ├── IWorkItemService.cs
+│   │       └── InMemoryWorkItemService.cs
+│   ├── Lab1.Domain/
+│   │   └── WorkItems/
+│   │       ├── WorkItem.cs
+│   │       └── WorkItemStatus.cs
+│   └── Lab1.Contract/
+│       └── WorkItems/
+│           ├── CreateWorkItemRequest.cs
+│           ├── UpdateWorkItemStatusRequest.cs
+│           └── WorkItemResponse.cs
+└── tests/
+    └── Lab1.Api.IntegrationTests/
